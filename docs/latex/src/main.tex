@@ -1,4 +1,5 @@
 % !TEX encoding = UTF-8 Unicode
+% !TEX TS-program = xelatex
 % !TEX root = main.tex
 
 % Compile with pdflatex
@@ -23,28 +24,20 @@
 \adjustmtc
 \printnomenclature
 
-Note use \citep{Liberzon2012} as main reference
-
-\part{Convex Optimisation}
-
-\chapter{Linear Programming}
-
-\chapter{Convex programming}
-
-\part{Infinite Dimensional}
-
-\chapter{Bayesian Optimization}
-
+Main references:
 \begin{itemize}
-	\item Eric Brochu, Vlad M. Cora, Nando de Freitas: A Tutorial on 
-	Bayesian Optimization of Expensive Cost Functions, with Application
-	 to Active User Modeling and Hierarchical Reinforcement Learning. 
-	 CoRR abs/1012.2599 (2010). arXiv:1012.2599. This is a good paper on
-	 the subject
-
-	\item Jonas Mockus (2013). Bayesian approach to global optimization: 
-	theory and applications. Kluwer Academic
+    \item 
 \end{itemize}
+
+\input{bayesian_inference/chapter.tex}
+
+\input{bayesian_computation/chapter.tex}
+
+\input{models/regression/chapter.tex}
+
+\input{models/nonlinear/chapter.tex}
+
+\input{models/nonparametric/chapter.tex}
 
 \appendix
 %\input{appendix.tex}
