@@ -4,15 +4,102 @@
 \chapter{Bayesian Inference}
 \minitoc
 
+A common and useful conceptualization in statistics is to think data is 
+generated from some true probability distribution with unknown parameters. 
+Then, \emph{inference} is the process of finding out the values of those parameters 
+using just a sample (also known as a dataset) from the true probability 
+distribution. \citep[pp. 12]{Martin:2018aa}
+
 \citep{Gelman2013}
 
+Bayesian modelling can be summarized in three steps \citep{Martin:2018aa}:
+\begin{enumerate}
+    \item Given some data and some assumptions on how this data could 
+    have been generated, design a model by combining building blocks known
+     as probability distributions. Most of the time these models are crude 
+     approximations, but most of the time is all we need.
+
+     \item Use Bayes' theorem to add data to the models and derive the 
+     logical consequences of combining the data and assumptions. This step
+     is called conditioning the model on the data.
+
+     \item Criticize the model by checking whether the model makes 
+     sense according to different criteria, including the data, the 
+     expertise on the subject, and sometimes by comparing several models.
+\end{enumerate}
+
+Bayesian models are also known as probabilistic models because they are built
+ using probabilities. Why probabilities? Because probabilities are the correct
+  mathematical tool to model uncertainty, so let's take a walk through the garden
+   of forking paths.
+
 Initial definitions:
-\begin{itemize}
-    \item $p(x)$: prior
-    \item $p(x|\theta)$: likelihood
-    \item $p(\theta|x)$: posterior
-    \item $p(\theta)$: marginal likelihood
-\end{itemize}
+\begin{description}
+    \item[$p(x)$] is called as \emph{prior}\index{prior}. The prior distribution should reflect 
+    what we know about the value of the parameter before seeing the data, $y$.
+
+    \item[$p(x|\theta)$] is called as \emph{likelihood}. The likelihood is how 
+    we will introduce data in our analysis. It is an expression of the 
+    plausibility of the data given the parameters. In some texts, you will 
+    find people call this term sampling model, statistical model, or just model.
+
+    \item[$p(\theta|x)$] is called as \emph{posterior}. The posterior distribution 
+    is the result of the Bayesian analysis and reflects all that we know about a 
+    problem (given our data and model). The posterior is a probability distribution 
+    for the parameters in our model and not a single value. This distribution is 
+    a balance between the prior and the likelihood.
+
+    \item[$p(\theta)$] is called as \emph{marginal likelihood}. The last term is 
+    the marginal likelihood, also known as evidence. Formally, the marginal 
+    likelihood is the probability of observing the data averaged over all the possible 
+    values the parameters can take (as prescribed by the prior).
+\end{description}
+
+\begin{example}[Flipping a coin]
+    In this example, the question to be answered is: Is a coin unbiased? 
+
+    To proceed, the following notation is defined
+    \begin{description}
+        \item[$\theta$] is the parameter.
+        \item[$N$] is the number of tosses.
+        \item[$y$] is the number of heads. 
+    \end{description}
+
+    \textbf{Choosing the Likelihood}. Assume that only heads and tails are possible event outcomes, and that coin tosses are independent of each other. Under these assumptions, a candidate for likelihood function is the \emph{binomial} distribution:
+    \begin{equation}
+        p(y|\theta, N)=\dfrac{N!}{y!(N-y)!}\theta^y(1-\theta)^{N-y}\;.
+    \end{equation}
+    This is a discrete distribution returning the probability of getting $y$ heads 
+    (or in general, successes) out of $N$ coin tosses (or in general, trials or experiments) 
+    given a fixed value of $\theta$.
+
+    The binomial distribution is a reasonable choice for the likelihood. One can see that $\theta$
+    indicates how likely it is to obtain a head when tossing a coin. Since the value of $\theta$ is
+    unknown, it will be obtained using Bayes' theorem.
+
+    \textbf{Choosing the Prior}. The prior chosen is the \emph{beta} distribution
+    \begin{equation}
+        p(\theta)=\dfrac{\Gamma(\alpha+|beta)}{\Gamma(\alpha)\Gamma(\beta)}\theta^{\alpha-1}(1-\theta)^{\beta-1}\;.
+    \end{equation}
+    The beta distribution looks similar to the binomial except for the first term which is a normalizing constant that ensures the distribution integrates to 1, and $\Gamma$ is the \emph{gamma function}.
+
+    Why using the beta distribution as the prior? 
+    \begin{itemize}
+        \item The beta distribution is restricted to be between 0 and 1, in the same way parameter $\theta$ is. 
+        \item The beta distribution is the conjugate prior of the binomial distribution (which we are using as the likelihood). A conjugate prior of a likelihood is a prior that, when used in combination with a given likelihood, returns a posterior with the same functional form as the prior.
+    \end{itemize}
+    
+    \textbf{Getting the Posterior}. From  Bayes' theorem, the posterior is proportional to the likelihood times the prior:
+    \begin{equation*}
+        \begin{array}{rcl}
+            p(\theta|y)&\propto&p(y|\theta)p(\theta)\\
+                       &=&\dfrac{N!}{y!(N-y)!}\theta^y(1-\theta)^{N-y}\dfrac{\Gamma(\alpha+|beta)}{\Gamma(\alpha)\Gamma(\beta)}\theta^{\alpha-1}(1-\theta)^{\beta-1}\\
+                       &=&\theta^{y+\alpha-1}(1-\theta)^{N-y+\beta-1}
+        \end{array}
+    \end{equation*}
+    This expression has the same functional form of a beta distribution (except for the normalization term) with $\alpha_{posterior}=\alpha_{prior}+y$ and $\beta_{posterior}=\beta_{prior}+N-y$. In fact,
+    $$p(\theta|y)\propto Beta(\alpha_{prior}+y, \beta_{prior}+N-y)$$
+\end{example}
 
 \section{Probability Theory}
 
