@@ -8,7 +8,7 @@
         "-synctex=1",
         "-interaction=nonstopmode",
         "-file-line-error",
-        "-pdf",
+        "-xelatex",
         "-outdir=%OUTDIR%",
         "%DOC%"
       ],
@@ -63,5 +63,7 @@
       ],
       "env": {}
     }
-  ]
+  ],
+  "latex-workshop.docker.enabled": true,
+  "latex-workshop.docker.image.latex": "hsteinshiromoto/tex"
 }
