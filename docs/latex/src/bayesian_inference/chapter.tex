@@ -79,7 +79,7 @@ Initial definitions:
 
     \paragraph{Choosing the Prior}. The prior chosen is the \emph{beta} distribution
     \begin{equation}
-        p(\theta)=\dfrac{\Gamma(\alpha+|beta)}{\Gamma(\alpha)\Gamma(\beta)}\theta^{\alpha-1}(1-\theta)^{\beta-1}\;.
+        p(\theta)=\dfrac{\Gamma(\alpha+\beta)}{\Gamma(\alpha)\Gamma(\beta)}\theta^{\alpha-1}(1-\theta)^{\beta-1}\;.
     \end{equation}
     The beta distribution looks similar to the binomial except for the first term which is a normalizing constant that ensures the distribution integrates to 1, and $\Gamma$ is the \emph{gamma function}.
 
@@ -140,6 +140,16 @@ Initial definitions:
         
 
 \end{example}
+
+\section{The Influence of Prior and How to Choose One}
+
+In general, the main problem os selectin a prior is related thinking that the prior will not allow the data "speak about itself". 
+
+Priors range in a spectrum of informative categories from non-informative to informative. Here, weakly-informative\index{Prior!weakly informative} \index{weakly-informative prior} priors are considered. These are distributions that convey a small amount of information of the parameters.
+
+Weakly-informative priors keep the posterior distributions within certain bounds. For this reason, they are also known as regularizing priors\index{Prior!regularizing} \index{regularizing prior}. For this reason, if a prior is reliable, there is no reason to discard it.
+
+In particular cases, a uniformly-distributed prior is equivalent to likelihood maximization.
 
 \section{Probability Theory}
 
